@@ -29,5 +29,36 @@ describe('WebdriverIO Homework', () => {
         await expect(cross).toExist();
         await cross.click();
         await browser.pause(1000);
-    })
+    });
+    it('Homework 2', async () => {
+        // Navigate to webdriverio  
+        await browser.url('https://webdriver.io/');
+        await browser.maximizeWindow();
+        // click API
+        const API = await browser.$('//*[@id="__docusaurus"]/nav/div[1]/div[1]/a[3]');
+        await expect(API).toExist();
+        await API.click();
+        await expect(browser).toHaveUrl('https://webdriver.io/docs/api');
+  
+        let element = await browser.$('//*[@id="__docusaurus"]/footer/div/div[1]/div[1]/ul/li[2]/a');
+        await expect(element).toExist();
+        await element.scrollIntoView();
+        await expect(element).toBeDisplayedInViewport();
+
+        element = await browser.$('//*[@id="__docusaurus_skipToContent_fallback"]/div/div/main/div/div/div[1]/div/nav/a');
+        await expect(element).toExist();
+        await element.scrollIntoView();
+        await expect(element).toBeDisplayedInViewport();
+        await expect(element).toBeEnabled();
+        await expect(element).toBeClickable();
+        console.log("Element: ",await element.getHTML(false));
+        element.click();
+        await browser.waitUntil(async ()=>{
+                return await browser.$('//*[@id="webdriver-protocol"]').isDisplayed();
+        },{
+            timeout: 5000,
+            timeoutMsg: "Element is not Visible"
+        });
+        
+    });
 })

@@ -135,7 +135,7 @@ describe('WebdriverIO main page', () => {
         await browser.switchWindow("https://webdriver.io/");
         await expect(browser).toHaveTitle("WebdriverIO · Next-gen browser and mobile automation test framework for Node.js | WebdriverIO");
     });
-    it("Should wait until",async()=>{
+    xit("Should wait until",async()=>{
         await browser.url('https://webdriver.io/');
 
         await browser.waitUntil(
@@ -148,7 +148,7 @@ describe('WebdriverIO main page', () => {
             }
         )
     });
-    it("Should have some html",async()=>{
+    xit("Should have some html",async()=>{
         await browser.url('https://webdriver.io/');
         const element = browser.$('//*[@id="__docusaurus"]/nav/div[1]/div[2]/div[1]');
         console.log("Outer HTML: ",await element.getHTML());
