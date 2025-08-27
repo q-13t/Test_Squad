@@ -74,5 +74,28 @@ describe('WebdriverIO main page', () => {
 
         await expect(fresh_label).toHaveText("Свіже");
     });
+    it("Should be displayed",async()=>{
+        await browser.url('https://webdriver.io/');
+        const git_button = await browser.$('//*[@id="__docusaurus_skipToContent_fallback"]/header/div/div[1]/a[3]');
+        await expect(git_button).toBeDisplayed();
+    });
+
+    it("Should be visible",async()=>{
+        await browser.url('https://webdriver.io/');
+        const git_button = await browser.$('//*[@id="__docusaurus_skipToContent_fallback"]/header/div/div[1]/a[3]');
+        await expect(git_button).toBeDisplayedInViewport();
+    });
+
+    it("Should not be visible",async()=>{
+        await browser.url('https://webdriver.io/');
+        const help_button = await browser.$('//*[@id="__docusaurus"]/footer/div/div[1]/div[1]/ul/li[4]/a');
+        await expect(help_button).not.toBeDisplayedInViewport();
+    });
+
+    it("Should be clickable",async()=>{
+        await browser.url('https://webdriver.io/');
+        const git_button = await browser.$('//*[@id="__docusaurus_skipToContent_fallback"]/header/div/div[1]/a[3]');
+        await expect(git_button).toBeClickable();
+    });
 })
 

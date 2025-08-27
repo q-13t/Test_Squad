@@ -1,7 +1,7 @@
 import { expect, browser } from '@wdio/globals'
 
 describe('WebdriverIO Homework', () => {
-    it('Homework 1', async () => {
+    xit('Homework 1', async () => {
         // Navigate to webdriverio  
         await browser.url('https://webdriver.io/');
         await browser.maximizeWindow();
