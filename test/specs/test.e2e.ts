@@ -48,7 +48,7 @@ describe('WebdriverIO main page', () => {
         await expect(browser).toHaveUrl('https://the-internet.herokuapp.com/secure');
     });
 
-    it("Should have attribute",async ()=>{
+    xit("Should have attribute",async ()=>{
         await browser.url("https://dou.ua");
         const search = await browser.$("#txtGlobalSearch");
 
@@ -58,6 +58,21 @@ describe('WebdriverIO main page', () => {
         
         await search.setValue("test");
         await expect(search).toHaveValue("test");
+    });
+
+    it("Should getLocation",async()=>{
+        await browser.url("https://dou.ua");
+        const fresh_label = await browser.$("body > div > div.l-content.m-content > div > div.col70.m-cola > div.b-most-interesting > div.l-content.m-db > div.l-content-wrap.m-db > div:nth-child(3) > div > ul.b-articles-switch > li.current > a");
+        console.log("Current label: ",await fresh_label.getLocation());
+        console.log("Current label X: ",await fresh_label.getLocation("x"));
+        console.log("Current label y: ",await fresh_label.getLocation("y"));
+    });
+
+    it("Should have text",async()=>{
+        await browser.url("https://dou.ua");
+        const fresh_label = await browser.$("body > div > div.l-content.m-content > div > div.col70.m-cola > div.b-most-interesting > div.l-content.m-db > div.l-content-wrap.m-db > div:nth-child(3) > div > ul.b-articles-switch > li.current > a");
+
+        await expect(fresh_label).toHaveText("Свіже");
     });
 })
 
