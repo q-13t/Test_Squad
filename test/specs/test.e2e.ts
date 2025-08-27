@@ -98,11 +98,11 @@ describe('WebdriverIO main page', () => {
         await expect(git_button).toBeClickable();
     });
 
-    it("Should be enabled",async()=>{
+    xit("Should be enabled",async()=>{
         await browser.url('https://webdriver.io/');
         await expect(await browser.$('//*[@id="__docusaurus_skipToContent_fallback"]/header/div/div[1]/a[3]')).toBeEnabled();
     });
-    it("To be focused",async()=>{
+    xit("To be focused",async()=>{
         await browser.url('https://webdriver.io/');
         const git_button = await browser.$('//*[@id="__docusaurus_skipToContent_fallback"]/header/div/div[1]/a[3]');
         await expect(git_button).not.toBeFocused();
@@ -110,12 +110,50 @@ describe('WebdriverIO main page', () => {
         await expect(git_button).toBeFocused();
     });
 
-    it("Should scrolled into",async()=>{
+    xit("Should scrolled into",async()=>{
         await browser.url('https://webdriver.io/');
         const help_button = await browser.$('//*[@id="__docusaurus"]/footer/div/div[1]/div[1]/ul/li[4]/a');
         await expect(help_button).not.toBeDisplayedInViewport();
         await help_button.scrollIntoView();
         await expect(help_button).toBeDisplayedInViewport();
+    });
+
+    xit("Should take screenshot",async()=>{
+        await browser.url('https://webdriver.io/');
+        const help_button = await browser.$('//*[@id="__docusaurus"]/footer/div/div[1]/div[1]/ul/li[4]/a');
+        await help_button.scrollIntoView();
+        await browser.pause(1000);
+        await help_button.saveScreenshot("screenshot.png");
+    });
+
+
+    xit("Should switch to new window",async()=>{
+        await browser.url('https://webdriver.io/');
+        await expect(browser).toHaveTitle("WebdriverIO · Next-gen browser and mobile automation test framework for Node.js | WebdriverIO");
+        await browser.newWindow("https://webdriver.io/docs/api");
+        await expect(browser).toHaveTitle("Introduction | WebdriverIO");
+        await browser.switchWindow("https://webdriver.io/");
+        await expect(browser).toHaveTitle("WebdriverIO · Next-gen browser and mobile automation test framework for Node.js | WebdriverIO");
+    });
+    it("Should wait until",async()=>{
+        await browser.url('https://webdriver.io/');
+
+        await browser.waitUntil(
+            async () => {
+                return await browser.$('//*[@id="__docusaurus"]/footer/div/div[1]/div[1]/ul/li[4]/a').isDisplayed();
+            },
+            {
+                timeout: 5000,
+                timeoutMsg: "Help button is not displayed in viewport"
+            }
+        )
+    });
+    it("Should have some html",async()=>{
+        await browser.url('https://webdriver.io/');
+        const element = browser.$('//*[@id="__docusaurus"]/nav/div[1]/div[2]/div[1]');
+        console.log("Outer HTML: ",await element.getHTML());
+        console.log("Inner HTML: ",await element.getHTML(false));
+        
     });
     // it("",async()=>{});
 })
