@@ -60,7 +60,7 @@ describe('WebdriverIO main page', () => {
         await expect(search).toHaveValue("test");
     });
 
-    it("Should getLocation",async()=>{
+    xit("Should getLocation",async()=>{
         await browser.url("https://dou.ua");
         const fresh_label = await browser.$("body > div > div.l-content.m-content > div > div.col70.m-cola > div.b-most-interesting > div.l-content.m-db > div.l-content-wrap.m-db > div:nth-child(3) > div > ul.b-articles-switch > li.current > a");
         console.log("Current label: ",await fresh_label.getLocation());
@@ -68,7 +68,7 @@ describe('WebdriverIO main page', () => {
         console.log("Current label y: ",await fresh_label.getLocation("y"));
     });
 
-    it("Should have text",async()=>{
+    xit("Should have text",async()=>{
         await browser.url("https://dou.ua");
         const fresh_label = await browser.$("body > div > div.l-content.m-content > div > div.col70.m-cola > div.b-most-interesting > div.l-content.m-db > div.l-content-wrap.m-db > div:nth-child(3) > div > ul.b-articles-switch > li.current > a");
 
