@@ -23,7 +23,7 @@ describe('WebdriverIO main page', () => {
         await expect(input).toHaveValue('tomsmith123');
     });
 
-    it("should show setValue command", async () => {
+    xit("should show setValue command", async () => {
         await browser.url('https://the-internet.herokuapp.com/login');
 
         const input = await browser.$('#username');
@@ -35,7 +35,7 @@ describe('WebdriverIO main page', () => {
         await expect(input).toHaveValue('tomsmith');
     });
     
-    it("Should click", async ()=>{
+    xit("Should click", async ()=>{
         await browser.url('https://the-internet.herokuapp.com/login');
     
         const username = await browser.$('#username');
@@ -46,6 +46,18 @@ describe('WebdriverIO main page', () => {
         await button.click();
     
         await expect(browser).toHaveUrl('https://the-internet.herokuapp.com/secure');
+    });
+
+    it("Should have attribute",async ()=>{
+        await browser.url("https://dou.ua");
+        const search = await browser.$("#txtGlobalSearch");
+
+        await expect(search).toHaveAttribute("placeholder","пошук");
+        await expect(search).toHaveAttribute("type","text");
+        console.log("Placeholder: ",await search.getAttribute("placeholder"));
+        
+        await search.setValue("test");
+        await expect(search).toHaveValue("test");
     });
 })
 
