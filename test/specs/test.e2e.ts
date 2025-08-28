@@ -1,4 +1,5 @@
 import { expect, browser } from '@wdio/globals'
+import assert from 'assert/strict';
 
 describe('WebdriverIO main page', () => {
     xit('should have correct title', async () => {
@@ -154,6 +155,11 @@ describe('WebdriverIO main page', () => {
         console.log("Outer HTML: ",await element.getHTML());
         console.log("Inner HTML: ",await element.getHTML(false));
         
+    });
+    
+    it("Assert",async()=>{
+        assert(1 === 1,"1 is not equal to 1");
+        assert(1 === "hi","1 is not equal to hi");
     });
     // it("",async()=>{});
 })

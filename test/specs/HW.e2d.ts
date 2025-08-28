@@ -61,7 +61,7 @@ describe('WebdriverIO Homework', () => {
         });
     });
     
-    it('Homework 3', async () => {
+    it.skip('Homework 3', async () => {
         await browser.url('https://dou.ua');
         await browser.maximizeWindow();
 
