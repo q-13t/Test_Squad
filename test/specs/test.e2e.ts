@@ -1,5 +1,4 @@
 import { expect, browser } from '@wdio/globals'
-import assert from 'assert/strict';
 import LoginPage from '../pages/LoginPage.page';
 
 describe('WebdriverIO main page', () => {

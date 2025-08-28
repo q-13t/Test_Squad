@@ -1,6 +1,9 @@
 import { expect, browser } from '@wdio/globals'
 import DouMainPage from '../pages/DouMain.page';
 import DouJobsPage from '../pages/DouJobs.page';
+import GitHubPage from '../pages/GitHub.page';
+import { exec } from 'child_process';
+import assert from 'assert';
 
 describe('WebdriverIO Homework', () => {
     xit('Homework 1', async () => {
@@ -121,7 +124,7 @@ describe.skip("Homework 3", async () => {
     });
 });
 
-describe("Homework 4", async () => {
+describe.skip("Homework 4", async () => {
     it("DouPages", async () => {
         await browser.url('https://dou.ua');
         await browser.maximizeWindow();
@@ -137,4 +140,77 @@ describe("Homework 4", async () => {
         await expect(await DouJobsPage.fastNavLabel.getHTML()).toContain("Швидкий перехід");
 
     });
+});
+
+describe("Homework 5", async () => {
+    it("Task 1", async () => {
+        await browser.url('https://github.com');
+        await browser.maximizeWindow();
+        await GitHubPage.clickSighUpButton();
+
+        await GitHubPage.setEmail("Z0c4w@example.com");
+        await GitHubPage.setPassword("1234567890");
+        await GitHubPage.setUsername("tempUserName");
+        await GitHubPage.selectDropDownMenu();
+    });
+
+    it("Task 2", async () => {
+        await browser.url('https://github.com');
+        await browser.maximizeWindow();
+
+        await GitHubPage.scrollIntoHeader();
+        await expect(GitHubPage.someHeader).toExist();
+
+        await GitHubPage.mercedesButton.scrollIntoView();
+        await expect(GitHubPage.mercedesButton).toExist();
+        await expect(GitHubPage.mercedesButton).toBeClickable();
+
+        await GitHubPage.mercedesButton.click();
+        await expect(browser).toHaveUrl('https://github.com/customer-stories/mercedes-benz');
+        await expect($('/html/body/div[1]/div[4]/main/div[2]/div/div/h1')).toHaveText('Automotive excellence at Mercedes-Benz and seamless developer experience on GitHub go hand in hand.');
+    });
+    
+    it("Task 3", async () => {
+        await browser.url('https://github.com');
+        await browser.maximizeWindow();
+
+        await GitHubPage.subscribeButton.scrollIntoView();
+        await expect(GitHubPage.subscribeButton).toBeDisplayedInViewport();
+        await expect(GitHubPage.subscribeButton).toBeClickable();
+        await GitHubPage.subscribeButton.click();
+        
+        await expect(browser).toHaveUrl('https://resources.github.com/newsletter/');
+        await expect($('/html/body/div[1]/div/main/div/section[1]/div/div/section/div/div/div/h1')).toExist();
+        await $('/html/body/div[1]/div/main/div/section[2]/form/div/section[1]/span/input').setValue('Z0c4w@example.com');
+        await $('/html/body/div[1]/div/main/div/section[2]/form/div/section[2]/span/select').click();
+        await $('[value="CA"]').click();
+        await $('/html/body/div[1]/div/main/div/section[2]/form/div/section[1]/span/input').click();
+        await $('/html/body/div[1]/div/main/div/section[2]/form/div/button').click();
+        
+        await expect($('/html/body/div[1]/div/main/div/section[1]/div/div/section/div/div/div/h1')).toExist();
+    });
+    it("Task 4", async () => {
+        await browser.url('https://github.com');
+        await browser.maximizeWindow();
+
+        await $('/html/body/div[1]/div[3]/header/div/div[2]/div/div/qbsearch-input/div[1]/button/span').click();
+        await $('/html/body/div[1]/div[3]/header/div/div[2]/div/div/qbsearch-input/div[1]/div/modal-dialog/div/div/div/form/query-builder/div[1]/div[1]/div/div[2]/input').setValue('act');
+        await browser.keys("Enter");
+
+        const oneOfResults = await $('/html/body/div[1]/div[4]/main/react-app/div/div/div[1]/div/div/div[2]/div/div/div[1]/div[4]/div/div/div[1]/div/div[1]/h3/div/div[2]/a').getAttribute('href');
+        assert(oneOfResults.includes('act'), "No results found");
+    });
+    it("Task 5", async () => {
+        await browser.url('https://github.com');
+        await browser.maximizeWindow();
+        
+        await GitHubPage.pricingButton.click();
+        await expect(  $('/html/body/div[1]/div[4]/main/div[1]/h1')).toHaveText('Try the Copilot-powered platform');
+        const featuresButton = await $('/html/body/div[1]/div[4]/main/div[2]/div/div[3]/a');
+        await featuresButton.scrollIntoView();
+        await featuresButton.click();
+
+        await expect($('/html/body/div[1]/div[4]/main/div[5]/div/div[1]/div[1]/div/div[3]/div/h2')).toBeDisplayedInViewport();
+    });
+
 });
