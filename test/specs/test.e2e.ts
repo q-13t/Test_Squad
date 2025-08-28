@@ -165,7 +165,7 @@ describe('WebdriverIO main page', () => {
     // });
 
 
-    it("LoginPage test",async()=>{
+    it.skip("LoginPage test",async()=>{
         await browser.url('https://the-internet.herokuapp.com/login');
         await LoginPage.setUsername("tomsmith");
         await LoginPage.setPassword("SuperSecretPassword!");

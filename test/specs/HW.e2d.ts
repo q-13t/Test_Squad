@@ -1,5 +1,6 @@
 import { expect, browser } from '@wdio/globals'
-import assert from 'assert/strict';
+import DouMainPage from '../pages/DouMain.page';
+import DouJobsPage from '../pages/DouJobs.page';
 
 describe('WebdriverIO Homework', () => {
     xit('Homework 1', async () => {
@@ -117,5 +118,23 @@ describe.skip("Homework 3", async () => {
         await browser.maximizeWindow();
         await browser.$('/html/body/div[2]/footer/div[1]/div/nav[4]/ul/li[5]/a').click();
         await expect(browser).toHaveUrl('https://thegithubshop.com/');
+    });
+});
+
+describe("Homework 4", async () => {
+    it("DouPages", async () => {
+        await browser.url('https://dou.ua');
+        await browser.maximizeWindow();
+
+        await DouMainPage.clickOnSalariesButton();
+        
+        await expect(await DouMainPage.firstQuartile.getText()).toBe("I КВАРТИЛЬ");
+        await DouMainPage.clickOnJobsButton();
+
+        await expect(DouJobsPage.searchButton).toBeDisplayed();
+        await DouJobsPage.clickOnSearchButton();
+
+        await expect(await DouJobsPage.fastNavLabel.getHTML()).toContain("Швидкий перехід");
+
     });
 });
