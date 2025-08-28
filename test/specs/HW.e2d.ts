@@ -52,7 +52,7 @@ describe('WebdriverIO Homework', () => {
         await expect(element).toBeDisplayedInViewport();
         await expect(element).toBeEnabled();
         await expect(element).toBeClickable();
-        console.log("Element: ",await element.getHTML(false));
+        console.log("Element: ",await element.getHTML());
         element.click();
         await browser.waitUntil(async ()=>{
                 return await browser.$('//*[@id="webdriver-protocol"]').isDisplayed();
