@@ -1,4 +1,5 @@
 import { expect, browser } from '@wdio/globals'
+import assert from 'assert/strict';
 
 describe('WebdriverIO Homework', () => {
     xit('Homework 1', async () => {
@@ -73,6 +74,48 @@ describe('WebdriverIO Homework', () => {
         await expect(await browser.$('[src="https://www.googletagmanager.com/gtag/js?id=G-N62L6SV4PV"]')).toExist();
         await expect(await browser.$('//*[contains(text(),"AI") and @class = "link" and @href="https://dou.ua/forums/tags/AI/?from=fpcommunity"]')).toExist();
         await expect(await browser.$('[class="b-community-widget b-community-widget_ai "]')).toExist();
-
     });
-})
+});
+
+describe("Homework 3", async () => {
+    it("View All Playlists", async () => {
+        await browser.url('https://github.blog');
+        await browser.maximizeWindow();
+        const element_view_all_playlists = await browser.$('//*[@id="start-of-content"]/section/div[5]/div[2]/div/div[1]/div/div/a');
+        await element_view_all_playlists.scrollIntoView();
+        await expect(element_view_all_playlists).toBeDisplayedInViewport();
+    });
+    
+    it("Text Displayed At The Bottom", async () => {
+        await browser.url('https://github.blog');
+        await browser.maximizeWindow();
+        const element_github_banner = await browser.$('/html/body/div[2]/footer/div[1]/div/div/a');
+        await element_github_banner.scrollIntoView();
+        await expect(element_github_banner).toBeClickable();
+    });
+    it("Spotlight", async () => {
+        await browser.url('https://github.blog');
+        await browser.maximizeWindow();
+        const element_spotlight_text = await browser.$('//*[@id="h-spotlight"]');
+        await element_spotlight_text.scrollIntoView();
+        await expect(element_spotlight_text).toHaveText("Spotlight");
+    });
+    it("DropDown Menu is displayed after click", async () => {
+        await browser.url('https://github.blog');
+        await browser.maximizeWindow();
+        const element_engineering_button = await browser.$('//*[@id="menu-item-78825"]');
+        element_engineering_button.click();
+        await browser.waitUntil(async ()=>{
+            return await browser.$('//*[@id="primary-78825-dropdown"]').isDisplayed();
+        },{
+            timeout: 5000,
+            timeoutMsg: "Element is not Visible"
+        });
+    });
+    it("Button Opens Shop", async () => {
+        await browser.url('https://github.blog');
+        await browser.maximizeWindow();
+        await browser.$('/html/body/div[2]/footer/div[1]/div/nav[4]/ul/li[5]/a').click();
+        await expect(browser).toHaveUrl('https://thegithubshop.com/');
+    });
+});

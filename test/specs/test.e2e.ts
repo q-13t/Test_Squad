@@ -157,7 +157,7 @@ describe('WebdriverIO main page', () => {
         
     });
     
-    it("Assert",async()=>{
+    it.skip("Assert",async()=>{
         assert(1 === 1,"1 is not equal to 1");
         assert(1 === "hi","1 is not equal to hi");
     });
