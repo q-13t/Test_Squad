@@ -1,5 +1,6 @@
 import { expect, browser } from '@wdio/globals'
 import assert from 'assert/strict';
+import LoginPage from '../pages/LoginPage.page';
 
 describe('WebdriverIO main page', () => {
     xit('should have correct title', async () => {
@@ -149,17 +150,27 @@ describe('WebdriverIO main page', () => {
             }
         )
     });
-    xit("Should have some html",async()=>{
-        await browser.url('https://webdriver.io/');
-        const element = browser.$('//*[@id="__docusaurus"]/nav/div[1]/div[2]/div[1]');
-        console.log("Outer HTML: ",await element.getHTML());
-        console.log("Inner HTML: ",await element.getHTML(false));
+    // Commented out to not show errors, works fine
+    // xit("Should have some html",async()=>{
+    //     await browser.url('https://webdriver.io/');
+    //     const element = browser.$('//*[@id="__docusaurus"]/nav/div[1]/div[2]/div[1]');
+    //     console.log("Outer HTML: ",await element.getHTML());
+    //     console.log("Inner HTML: ",await element.getHTML(false));
         
-    });
+    // });
     
-    it.skip("Assert",async()=>{
-        assert(1 === 1,"1 is not equal to 1");
-        assert(1 === "hi","1 is not equal to hi");
+    // it.skip("Assert",async()=>{
+    //     assert(1 === 1,"1 is not equal to 1");
+    //     assert(1 === "hi","1 is not equal to hi");
+    // });
+
+
+    it("LoginPage test",async()=>{
+        await browser.url('https://the-internet.herokuapp.com/login');
+        await LoginPage.setUsername("tomsmith");
+        await LoginPage.setPassword("SuperSecretPassword!");
+        await LoginPage.clickSubmit();
+        await expect(browser).toHaveUrl("https://the-internet.herokuapp.com/secure");
     });
     // it("",async()=>{});
 })

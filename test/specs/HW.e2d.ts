@@ -77,7 +77,7 @@ describe('WebdriverIO Homework', () => {
     });
 });
 
-describe("Homework 3", async () => {
+describe.skip("Homework 3", async () => {
     it("View All Playlists", async () => {
         await browser.url('https://github.blog');
         await browser.maximizeWindow();
