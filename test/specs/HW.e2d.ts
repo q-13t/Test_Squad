@@ -30,7 +30,7 @@ describe('WebdriverIO Homework', () => {
         await cross.click();
         await browser.pause(1000);
     });
-    it('Homework 2', async () => {
+    xit('Homework 2', async () => {
         // Navigate to webdriverio  
         await browser.url('https://webdriver.io/');
         await browser.maximizeWindow();
@@ -59,6 +59,20 @@ describe('WebdriverIO Homework', () => {
             timeout: 5000,
             timeoutMsg: "Element is not Visible"
         });
+    });
+    
+    it('Homework 3', async () => {
+        await browser.url('https://dou.ua');
+        await browser.maximizeWindow();
+
+        await expect(await browser.$('/html/body/div/div[4]/div/div[2]/ul/li[1]/a')).toExist();
+        await expect(await browser.$('//*[@id="fp-articles_recent"]/li[2]/a[1]')).toExist();
+        await expect(await browser.$('/html/body/div/div[4]/div/aside/div[1]/a[22]/img')).toExist();
         
+        await expect(await browser.$('[name="twitter:site"]')).toExist();
+        await expect(await browser.$('[src="https://www.googletagmanager.com/gtag/js?id=G-N62L6SV4PV"]')).toExist();
+        await expect(await browser.$('//*[contains(text(),"AI") and @class = "link" and @href="https://dou.ua/forums/tags/AI/?from=fpcommunity"]')).toExist();
+        await expect(await browser.$('[class="b-community-widget b-community-widget_ai "]')).toExist();
+
     });
 })
